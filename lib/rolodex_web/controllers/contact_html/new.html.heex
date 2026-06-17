@@ -5,6 +5,9 @@
   </.header>
 
   <.form :let={form} for={@changeset} action={~p"/contacts"}>
+    <.error :if={@changeset.action}>
+      Ooops, something went wrong! Please check the errors below.
+    </.error>
     <fieldset class="fieldset mb-2">
       <label>
         <span class="label mb-1">Name</span>
