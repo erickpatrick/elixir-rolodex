@@ -19,7 +19,7 @@ defmodule Rolodex.Contacts.Contact do
     |> cast(attrs, [:name, :email, :favorite, :notes, :title, :birthday])
     |> validate_required([:name])
     |> validate_length(:name, max: 100)
-    |> validate_length(:email, max: 100)
+    |> validate_length(:email, max: 100, min: 3)
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> unsafe_validate_unique(:email, Rolodex.Repo)
     |> unique_constraint(:email)
