@@ -2,6 +2,8 @@ defmodule Rolodex.Contacts.Contact do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @titles ~w[Mr Mrs Miss Ms Dr Prof Rev Capt]a
+
   schema "contacts" do
     field :name, :string
     field :email, :string
@@ -24,4 +26,6 @@ defmodule Rolodex.Contacts.Contact do
     |> unsafe_validate_unique(:email, Rolodex.Repo)
     |> unique_constraint(:email)
   end
+
+  def titles, do: @titles
 end
