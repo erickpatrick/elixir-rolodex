@@ -25,6 +25,13 @@ defmodule Rolodex.Contacts.Contact do
     |> validate_format(:email, ~r/^[^\s]+@[^\s]+$/, message: "must have the @ sign and no spaces")
     |> unsafe_validate_unique(:email, Rolodex.Repo)
     |> unique_constraint(:email)
+    |> validate_change(:birthday, fn :birthday, birthday ->
+      if Date.compare(birthday, Date.utc_today()) == :gt do
+        [{:birthday, "can't be in the future"}]
+      else
+        []
+      end
+    end)
   end
 
   def titles, do: @titles
